@@ -7,8 +7,7 @@ def day9_2(): Unit = {
     val point = input(x)(y)
     val isLow = Seq((-1, 0), (1, 0), (0, 1), (0, -1)).forall {
       case (dx, dy) =>
-        val adjPoint = input.lift(x + dx).getOrElse(Seq())
-          .lift(y + dy).getOrElse(9)
+        val adjPoint = safeGet(input, x + dx, y + dy, 9)
         point < adjPoint
     }
     if (isLow) {
@@ -22,8 +21,7 @@ def day9_2(): Unit = {
     var visited = next.toSet
     while(next.nonEmpty) {
       next = (for ((x, y) <- next; (dx, dy) <- Seq((-1, 0), (1, 0), (0, 1), (0, -1))) yield {
-        val adjPoint = input.lift(x + dx).getOrElse(Seq())
-          .lift(y + dy).getOrElse(9)
+        val adjPoint = safeGet(input, x + dx, y + dy, 9)
         if (adjPoint == 9 || visited.contains((x + dx, y + dy)))
           None
         else

@@ -7,8 +7,7 @@ def day9(): Unit = {
     val point = input(x)(y)
     val isLow = Seq((-1, 0), (1, 0), (0, 1), (0, -1)).forall {
       case (dx, dy) =>
-        val adjPoint = input.lift(x + dx).getOrElse(Seq())
-          .lift(y + dy).getOrElse(9)
+        val adjPoint = safeGet(input, x + dx, y + dy, 9)
         point < adjPoint
     }
     if (isLow)

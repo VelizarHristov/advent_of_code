@@ -1,8 +1,9 @@
 import scala.io.Source
+import collection.mutable.ArraySeq
 
 @main
 def day11_2(): Unit = {
-  val octopi = Source.fromFile("resources/11").getLines.toArray.map(_.split("").map(_.toInt))
+  val octopi = Source.fromFile("resources/11").getLines.to(ArraySeq).map(_.split("").map(_.toInt).to(ArraySeq))
   var steps = 0
   while (octopi.flatten.exists(_ != 0)) {
     var willFlash = Set.empty[(Int, Int)]
@@ -19,7 +20,7 @@ def day11_2(): Unit = {
         dx <- Seq(-1, 0, 1)
         dy <- Seq(-1, 0, 1)
         if !(dx == 0 && dy == 0)
-        if octopi.lift(x + dx).getOrElse(Array.empty[Int]).lift(y + dy).nonEmpty
+        if safeGet(octopi, x + dx, y + dy).nonEmpty
       } {
         octopi(x + dx)(y + dy) += 1
         if (octopi(x + dx)(y + dy) == 10) {
