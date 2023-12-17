@@ -6,7 +6,6 @@ def day11_2_2023(): Unit = {
   val grid = Source.fromFile("resources/11_2023").getLines.map(line => {
     line.map(_ == '#').to(mutable.ArraySeq)
   }).to(mutable.ArraySeq)
-  var added = 0
   val bigRows = grid.transpose.indices.filter(i => grid(i).forall(x => !x)).toSet
   val bigCols = grid.indices.filter(i => grid.transpose.apply(i).forall(x => !x)).toSet
   val galaxyCoords = for {
