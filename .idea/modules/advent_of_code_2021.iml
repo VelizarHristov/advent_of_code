@@ -14,5 +14,9 @@
     <orderEntry type="library" name="sbt: scala-sdk-3.3.1" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.13.10:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang:scala3-library_3:3.3.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:algebra_3:2.10.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-collections-core_3:0.9.8:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-core_3:2.10.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.typelevel:cats-kernel_3:2.10.0:jar" level="project" />
   </component>
 </module>
