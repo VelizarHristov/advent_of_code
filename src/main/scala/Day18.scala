@@ -79,6 +79,5 @@ def day18(): Unit = {
   var cur = parse(input.head)
   for (line <- input.tail)
     cur = reduce(cur + parse(line))
-  val q = cur + cur
   println(cur.magnitude)
 }
