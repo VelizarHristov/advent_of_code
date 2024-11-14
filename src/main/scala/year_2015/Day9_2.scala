@@ -9,11 +9,7 @@ def day9_2(): Unit = {
     val Array(dst, value) = rest.split(" = ")
     (Set(src, dst), value.toInt)
   }).toMap
-  var maxPath = -1
-  val allPaths = adj.keySet.flatten.toVector.permutations
-  for (path <- allPaths) {
-    val pathLen = path.zip(path.tail).map((s, d) => adj(Set(s, d))).sum
-    maxPath = maxPath max pathLen
-  }
-  println(maxPath)
+  val pathCosts = for (path <- adj.keySet.flatten.toVector.permutations) yield
+    path.zip(path.tail).map((s, d) => adj(Set(s, d))).sum
+  println(pathCosts.max)
 }
