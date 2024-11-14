@@ -1,6 +1,5 @@
 package year_2015
 
-import collection.mutable
 import io.Source
 
 @main
