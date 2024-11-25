@@ -1,6 +1,7 @@
 package year_2022
 
 import io.Source
+import year_2022.Helpers.wrapMod
 
 @main
 def day20(): Unit = {
@@ -9,7 +10,6 @@ def day20(): Unit = {
 
   val nums = Source.fromFile("resources/2022/20").getLines().toArray.map(_.toInt)
   val zeroPos = nums.indexOf(0)
-  def wrapMod(i: Int, j: Int) = ((i % j) + j) % j
   for ((num, i) <- nums.zipWithIndex if num != 0) {
     val pos = wrapMod(i - zeroPos - 1, nums.length)
     idxToPos(i) = pos

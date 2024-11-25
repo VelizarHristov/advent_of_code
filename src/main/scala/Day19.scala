@@ -4,8 +4,9 @@ import annotation.{tailrec, targetName}
 import collection.mutable
 import io.Source
 
-@main // slow runtime
+@main // slow runtime - about 200 seconds on my machine
 def day19(): Unit = {
+  val timeMsAtStart = System.currentTimeMillis()
   case class Rotation(signs: Seq[Int], indices: Seq[Int])
   case class XYZ(x: Int, y: Int, z: Int) {
     lazy val toSeq: Seq[Int] = Seq(x, y, z)
@@ -82,4 +83,6 @@ def day19(): Unit = {
   }
   val res = scanners.head.size
   println(res)
+  val msTaken = System.currentTimeMillis() - timeMsAtStart
+  println("Took " + (msTaken / 1000) + "s" + (msTaken % 1000) + "ms")
 }
