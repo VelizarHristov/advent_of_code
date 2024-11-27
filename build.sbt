@@ -2,6 +2,12 @@ ThisBuild / version := "0.1.0-SNAPSHOT"
 
 ThisBuild / scalaVersion := "3.5.2"
 scalacOptions += "-deprecation"
+scalacOptions += "-Wunused:all"
+scalacOptions += "-Wdead-code"
+scalacOptions += "-Wnumeric-widen"
+scalacOptions += "-Woctal-literal"
+scalacOptions += "-Wself-implicit"
+scalacOptions += "-Xlint:all"
 
 libraryDependencies += "org.typelevel" %% "cats-core" % "2.12.0"
 libraryDependencies += "org.typelevel" %% "cats-collections-core" % "0.9.8"
