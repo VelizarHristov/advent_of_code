@@ -8,7 +8,7 @@ def day13_2(): Unit = {
     override def toString: String = "[" + data.mkString(",") + "]"
   }
   def compareTo(data1: PacketData | Int, data2: PacketData | Int): Int = (data1, data2) match {
-    case (i1: Int, i2: Int) => i1 compareTo i2
+    case (i1: Int, i2: Int) => i1.compareTo(i2)
     case (PacketData(_), i2: Int) => compareTo(data1, PacketData(List(i2)))
     case (i1: Int, PacketData(_)) => compareTo(PacketData(List(i1)), data2)
     case (PacketData(ls1), PacketData(ls2)) =>

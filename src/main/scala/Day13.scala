@@ -2,6 +2,7 @@ import scala.io.Source
 
 @main
 def day13(): Unit = {
+  /*
   def display(grid: Array[Array[Boolean]]): Unit = {
     for (y <- grid.indices) {
       for (x <- grid(y).indices) {
@@ -13,6 +14,7 @@ def day13(): Unit = {
       println()
     }
   }
+  */
 
   val input = Source.fromFile("resources/13").getLines
   val dots = input.takeWhile(_.contains(',')).map(line => {

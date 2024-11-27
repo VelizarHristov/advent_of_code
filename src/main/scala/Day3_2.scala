@@ -6,7 +6,6 @@ def day3_2(): Unit = {
   val Seq(o2Rating, co2Rating) = for (preferredBit <- Seq('1', '0')) yield {
     var lines = input
     for (i <- input.head.indices) {
-      val lineSize = lines.length - i
       val preferredBitCount = lines.map(_(i)).count(_ == preferredBit)
       val desiredBit =
         if (preferredBitCount == lines.length / 2.0) preferredBit

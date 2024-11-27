@@ -2,7 +2,6 @@ import scala.io.Source
 
 @main
 def day8_2(): Unit = {
-  val unambiguousLengths = Set(2, 3, 4, 7)
   val res = Source.fromFile("resources/8").getLines.map(line => {
     val (inputs, outputs) = "[a-g]+".r.findAllIn(line).toSeq.map(_.toSet).splitAt(10)
     val one = inputs.find(_.size == 2).get

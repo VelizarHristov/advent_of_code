@@ -36,7 +36,6 @@ def day24(): Unit = {
       val parts = line.split(' ')
       val op = parts.head
       val a = parts(1).head
-      val qqq = 123
       lazy val b = parts(2).toIntOption.map(BigInt.apply).getOrElse(vars(parts(2).head))
       op match {
         case "inp" => vars(a) = number.dequeue()

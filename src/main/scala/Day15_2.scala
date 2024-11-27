@@ -14,7 +14,6 @@ def day15_2(): Unit = {
   } yield mapNum(num, i + j)
   val visited = mutable.Map(((0, 0), 0)).withDefaultValue(Int.MaxValue)
   case class State(pos: (Int, Int), cost: Int)
-  var states = Seq(State((0, 0), 0))
   val finalPos = (grid.size - 1, grid.head.size - 1)
   val queue = mutable.PriorityQueue[State](State((0, 0), 0))((s1, s2) => s2.cost.compare(s1.cost))
   while (queue.nonEmpty) {

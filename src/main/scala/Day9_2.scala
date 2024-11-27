@@ -29,7 +29,6 @@ def day9_2(): Unit = {
       }).flatten
       visited ++= next
     }
-    val q = visited.toList
     visited.size
   }
   val res = basinSizes.sorted.takeRight(3).product
