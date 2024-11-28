@@ -1,8 +1,10 @@
+package year_2023
+
 import scala.io.Source
 
 @main
-def day12_2023(): Unit = {
-  val res = Source.fromFile("resources/12_2023").getLines.map(line => {
+def day12(): Unit = {
+  val res = Source.fromFile("resources/2023/12").getLines.map(line => {
     val Array(record, arrangementStr) = line.split(' ')
     val arrangement = arrangementStr.split(',').map(_.toInt)
     (0 until record.count(_ == '?')).toSet.subsets.count(subset => {

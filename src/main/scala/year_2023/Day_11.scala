@@ -1,9 +1,11 @@
+package year_2023
+
 import scala.collection.mutable
 import scala.io.Source
 
 @main
-def day11_2023(): Unit = {
-  var grid = Source.fromFile("resources/11_2023").getLines.map(line => {
+def day11(): Unit = {
+  var grid = Source.fromFile("resources/2023/11").getLines.map(line => {
     line.map(_ == '#').to(mutable.ArraySeq)
   }).to(mutable.ArraySeq)
   var added = 0
