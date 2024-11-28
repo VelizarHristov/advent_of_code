@@ -1,3 +1,5 @@
+package year_2021
+
 import scala.annotation.{tailrec, targetName}
 import scala.io.Source
 

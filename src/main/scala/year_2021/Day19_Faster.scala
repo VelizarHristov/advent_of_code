@@ -1,3 +1,5 @@
+package year_2021
+
 import cats.syntax.all.*
 
 import scala.annotation.{tailrec, targetName}
@@ -97,10 +99,10 @@ def day19Faster(): Unit = {
     }
   }
 
-  var curDists = beaconsToDists(scanners.head)
+  val curDists = beaconsToDists(scanners.head)
   while (scanners.tail.exists(_.nonEmpty)) {
     val (rotatedScanner, nextIdx) = findMatchingBeacons(curDists)
-    // TODO: add new matches to curDists
+    // TODO: add new matches to curDists - they need to be mutable
     scanners(nextIdx) = Vector()
   }
   val res = scanners.head.size

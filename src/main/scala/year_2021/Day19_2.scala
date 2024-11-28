@@ -1,3 +1,5 @@
+package year_2021
+
 import cats.syntax.all.*
 
 import annotation.{tailrec, targetName}

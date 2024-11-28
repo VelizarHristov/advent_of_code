@@ -1,3 +1,5 @@
+package year_2021
+
 import collection.Seq
 
 def safeGet[A](ls: Seq[Seq[A]], x: Int, y: Int): Option[A] = {

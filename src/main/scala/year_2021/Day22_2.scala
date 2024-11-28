@@ -1,3 +1,5 @@
+package year_2021
+
 import io.Source
 import cats.syntax.all.*
 

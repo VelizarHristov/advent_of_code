@@ -1,3 +1,5 @@
+package year_2021
+
 import scala.collection.mutable
 import scala.io.Source
 
