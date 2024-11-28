@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main
 def day4_2(): Unit = {
-  val input = Source.fromFile("resources/4").getLines.toArray
+  val input = Source.fromFile("resources/2021/4").getLines.toArray
   val numbers = input.head.split(',').map(_.toInt)
   val boards = input.tail.grouped(6).map(lines => {
     lines.tail.map(_.trim.split("\\s+").map(_.toInt))

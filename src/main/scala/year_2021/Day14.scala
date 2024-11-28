@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main
 def day14(): Unit = {
-  val input = Source.fromFile("resources/14").getLines.toArray
+  val input = Source.fromFile("resources/2021/14").getLines.toArray
   var state = input.head
   val map = input.drop(2).map(line => {
     val Array(from, to) = line.split(" -> ")

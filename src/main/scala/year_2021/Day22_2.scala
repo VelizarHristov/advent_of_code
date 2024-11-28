@@ -15,7 +15,7 @@ def day22_2(): Unit = {
   ).filter(_.nonEmpty)
 
   var areas = Vector.empty[Vector[Range]]
-  Source.fromFile("resources/22").getLines.foreach(line => {
+  Source.fromFile("resources/2021/22").getLines.foreach(line => {
     val isOn = line.startsWith("on")
     val coords = "-?\\d+".r.findAllIn(line).toVector.map(_.toInt)
     val nextArea = Vector(

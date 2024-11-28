@@ -5,7 +5,7 @@ import collection.mutable.ArraySeq
 
 @main
 def day11_2(): Unit = {
-  val octopi = Source.fromFile("resources/11").getLines.to(ArraySeq).map(_.split("").map(_.toInt).to(ArraySeq))
+  val octopi = Source.fromFile("resources/2021/11").getLines.to(ArraySeq).map(_.split("").map(_.toInt).to(ArraySeq))
   var steps = 0
   while (octopi.flatten.exists(_ != 0)) {
     var willFlash = Set.empty[(Int, Int)]

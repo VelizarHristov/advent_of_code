@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main
 def day20(): Unit = {
-  val input = Source.fromFile("resources/20").getLines.toVector
+  val input = Source.fromFile("resources/2021/20").getLines.toVector
   val transformation = input.head
   val initialGrid = input.drop(2)
   val iterations = 2

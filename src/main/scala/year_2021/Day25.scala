@@ -4,7 +4,7 @@ import io.Source
 
 @main
 def day25(): Unit = {
-  var grid = Source.fromFile("resources/25").getLines.map(_.toCharArray).toArray
+  var grid = Source.fromFile("resources/2021/25").getLines.map(_.toCharArray).toArray
   var ticks = 0
   var hasMoved = true
   val nextGrid = grid.map(_.clone())

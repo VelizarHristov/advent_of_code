@@ -28,7 +28,7 @@ def day19(): Unit = {
 
   val scanners = mutable.ArrayBuffer[Vector[XYZ]]()
   var skipped = 0
-  val input = Source.fromFile("resources/19").getLines.drop(1).toVector
+  val input = Source.fromFile("resources/2021/19").getLines.drop(1).toVector
   while (skipped < input.length) {
     scanners += input.drop(skipped).takeWhile(_.nonEmpty).map(line => {
       val Array(x, y, z) = line.split(',').map(_.toInt)

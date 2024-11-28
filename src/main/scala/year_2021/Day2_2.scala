@@ -7,7 +7,7 @@ def day2_2(): Unit = {
   var horizontalPosition = 0
   var depth = 0
   var aim = 0
-  for (line <- Source.fromFile("resources/2").getLines) {
+  for (line <- Source.fromFile("resources/2021/2").getLines) {
     val Array(direction, amountStr) = line.split(" ")
     val amount = amountStr.toInt
     direction match {

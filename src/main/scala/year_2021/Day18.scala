@@ -77,7 +77,7 @@ def day18(): Unit = {
       reduce(n3)
   }
 
-  val input = Source.fromFile("resources/18").getLines.toList
+  val input = Source.fromFile("resources/2021/18").getLines.toList
   var cur = parse(input.head)
   for (line <- input.tail)
     cur = reduce(cur + parse(line))

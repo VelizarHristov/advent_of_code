@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main
 def day12_2(): Unit = {
-  val oneWayEdges = Source.fromFile("resources/12").getLines.map(line => {
+  val oneWayEdges = Source.fromFile("resources/2021/12").getLines.map(line => {
     val Array(from, to) = line.split('-')
     (from, to)
   }).toList

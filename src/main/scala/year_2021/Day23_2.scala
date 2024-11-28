@@ -19,7 +19,7 @@ def day23_2(): Unit = {
   }).toArray
 
   var startState = State(Map(), 0)
-  val input = Source.fromFile("resources/23").getLines.toVector
+  val input = Source.fromFile("resources/2021/23").getLines.toVector
   val startGrid = (input.take(3)
     :+ "  #D#C#B#A#"
     :+ "  #D#B#A#C#")

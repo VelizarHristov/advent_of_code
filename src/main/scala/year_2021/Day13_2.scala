@@ -16,7 +16,7 @@ def day13_2(): Unit = {
     }
   }
 
-  val input = Source.fromFile("resources/13").getLines
+  val input = Source.fromFile("resources/2021/13").getLines
   val dots = input.takeWhile(_.contains(',')).map(line => {
     val Array(x, y) = line.split(",").map(_.toInt)
     (x, y)

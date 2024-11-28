@@ -19,7 +19,7 @@ def day23(): Unit = {
   }).toArray
 
   var startState = State(Map(), 0)
-  val startGrid = Source.fromFile("resources/23").getLines.toArray
+  val startGrid = Source.fromFile("resources/2021/23").getLines.toArray
   for {
     i <- startGrid.indices
     j <- 0 until startGrid(i).length

@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main
 def day17(): Unit = {
-  val inputLine = Source.fromFile("resources/17").getLines.next
+  val inputLine = Source.fromFile("resources/2021/17").getLines.next
   val input = "(-?\\d+)".r.findAllIn(inputLine).map(_.toInt).toList
   val yRange = input(2) to input(3)
   if (yRange.min >= 0)

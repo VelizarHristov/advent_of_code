@@ -6,7 +6,7 @@ import collection.mutable
 @main
 def day22(): Unit = {
   val on = mutable.Set.empty[(Int, Int, Int)]
-  Source.fromFile("resources/22").getLines.foreach(line => {
+  Source.fromFile("resources/2021/22").getLines.foreach(line => {
     val isOn = line.startsWith("on")
     val coords = "-?\\d+".r.findAllIn(line).toSeq.map(_.toInt)
     for {

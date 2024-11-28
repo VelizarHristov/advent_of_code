@@ -5,7 +5,7 @@ import scala.io.Source
 @main
 def day6_2(): Unit = {
   var fishOfDays = Array.fill(9)(0L)
-  for (fish <- Source.fromFile("resources/6").getLines.next.split(",").map(_.toInt))
+  for (fish <- Source.fromFile("resources/2021/6").getLines.next.split(",").map(_.toInt))
     fishOfDays(fish) += 1
   for (_ <- 1 to 256) {
     val atZero = fishOfDays.head

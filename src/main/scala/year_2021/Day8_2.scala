@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main
 def day8_2(): Unit = {
-  val res = Source.fromFile("resources/8").getLines.map(line => {
+  val res = Source.fromFile("resources/2021/8").getLines.map(line => {
     val (inputs, outputs) = "[a-g]+".r.findAllIn(line).toSeq.map(_.toSet).splitAt(10)
     val one = inputs.find(_.size == 2).get
     val four = inputs.find(_.size == 4).get

@@ -6,7 +6,7 @@ import collection.mutable.ArraySeq
 
 @main
 def day15(): Unit = {
-  val grid = Source.fromFile("resources/15").getLines.to(ArraySeq).map(_.split("").map(_.toInt).to(ArraySeq))
+  val grid = Source.fromFile("resources/2021/15").getLines.to(ArraySeq).map(_.split("").map(_.toInt).to(ArraySeq))
   val visited = mutable.Map(((0, 0), 0)).withDefaultValue(Int.MaxValue)
   case class State(pos: (Int, Int), cost: Int)
   var states = Seq(State((0, 0), 0))

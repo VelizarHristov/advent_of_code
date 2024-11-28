@@ -6,7 +6,7 @@ import scala.io.Source
 def day10_2(): Unit = {
   val brackets = Map('(' -> ')', '[' -> ']', '{' -> '}', '<' -> '>')
   val valueMap = Map(')' -> 1, ']' -> 2, '}' -> 3, '>' -> 4)
-  val points = Source.fromFile("resources/10").getLines.map(line => {
+  val points = Source.fromFile("resources/2021/10").getLines.map(line => {
     var stack = List.empty[Char]
     var i = 0
     var isCorrupted = false

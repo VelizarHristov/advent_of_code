@@ -3,7 +3,7 @@ package year_2021
 import scala.io.Source
 @main
 def day5_2(): Unit = {
-  val coords = Source.fromFile("resources/5").getLines.map(line => {
+  val coords = Source.fromFile("resources/2021/5").getLines.map(line => {
     "\\d+".r.findAllIn(line).toSeq.map(_.toInt)
   }).toList
   val maxCoordinate = coords.flatten.max

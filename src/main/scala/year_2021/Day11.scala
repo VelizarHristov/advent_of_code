@@ -5,7 +5,7 @@ import scala.io.Source
 
 @main
 def day11(): Unit = {
-  val octopi = Source.fromFile("resources/11").getLines.to(ArraySeq).map(_.split("").map(_.toInt).to(ArraySeq))
+  val octopi = Source.fromFile("resources/2021/11").getLines.to(ArraySeq).map(_.split("").map(_.toInt).to(ArraySeq))
   var flashes = 0
   for (_ <- 1 to 100) {
     var willFlash = Set.empty[(Int, Int)]

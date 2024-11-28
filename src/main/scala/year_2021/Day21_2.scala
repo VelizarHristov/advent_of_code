@@ -7,7 +7,7 @@ import cats.syntax.all.*
 
 @main
 def day21_2(): Unit = {
-  val initialPositions = Source.fromFile("resources/21").getLines.map(line => {
+  val initialPositions = Source.fromFile("resources/2021/21").getLines.map(line => {
     line.reverse.takeWhile(_.isDigit).reverse.toInt
   }).toArray
   // for each player:

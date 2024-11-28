@@ -5,7 +5,7 @@ import scala.io.Source
 
 @main
 def day15_2(): Unit = {
-  val input = Source.fromFile("resources/15").getLines.toVector.map(_.split("").map(_.toInt))
+  val input = Source.fromFile("resources/2021/15").getLines.toVector.map(_.split("").map(_.toInt))
   def mapNum(n: Int, k: Int) = if (n + k >= 10) n + k - 9 else n + k
   val grid = for {
     i <- 0 to 4

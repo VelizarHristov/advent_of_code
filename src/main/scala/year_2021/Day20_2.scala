@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main // same code as Day20, except `val iterations = 50`
 def day20_2(): Unit = {
-  val input = Source.fromFile("resources/20").getLines.toVector
+  val input = Source.fromFile("resources/2021/20").getLines.toVector
   val transformation = input.head
   val initialGrid = input.drop(2)
   val iterations = 50

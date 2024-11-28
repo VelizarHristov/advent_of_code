@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main
 def day16(): Unit = {
-  val input = Source.fromFile("resources/16").getLines.next
+  val input = Source.fromFile("resources/2021/16").getLines.next
   val allBits: String = input.flatMap(c => {
     val cInt = Integer.parseInt(c.toString, 16)
     ("000" + cInt.toBinaryString).takeRight(4)

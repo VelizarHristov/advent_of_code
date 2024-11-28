@@ -4,7 +4,7 @@ import scala.io.Source
 
 @main
 def day21(): Unit = {
-  val positions = Source.fromFile("resources/21").getLines.map(line => {
+  val positions = Source.fromFile("resources/2021/21").getLines.map(line => {
     line.reverse.takeWhile(_.isDigit).reverse.toInt
   }).toArray
   val scores = Array.fill(positions.length)(0)

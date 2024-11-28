@@ -28,7 +28,7 @@ import collection.mutable
  */
 @main
 def day24(): Unit = {
-  val input = Source.fromFile("resources/24").getLines.toArray
+  val input = Source.fromFile("resources/2021/24").getLines.toArray
 
   def check(inputNumber: String): BigInt = {
     val vars = mutable.Map[Char, BigInt]('w' -> 0, 'x' -> 0, 'y' -> 0, 'z' -> 0)

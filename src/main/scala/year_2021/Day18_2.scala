@@ -77,7 +77,7 @@ def day18_2(): Unit = {
       reduce(n3)
   }
 
-  val input = Source.fromFile("resources/18").getLines.toArray
+  val input = Source.fromFile("resources/2021/18").getLines.toArray
   val sums = for (s1 <- input; s2 <- input; if s1 != s2) yield {
     val n = parse(s1) + parse(s2)
     reduce(n).magnitude
