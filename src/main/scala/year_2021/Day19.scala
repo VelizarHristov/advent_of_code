@@ -7,11 +7,11 @@ import io.Source
 @main // slow runtime - about 200 seconds on my machine
 def day19(): Unit = {
   val timeMsAtStart = System.currentTimeMillis()
-  case class Rotation(signs: Seq[Int], indices: Seq[Int])
+  case class Rotation(signs: Array[Int], indices: Array[Int])
   case class XYZ(x: Int, y: Int, z: Int) {
     lazy val toSeq: Seq[Int] = Seq(x, y, z)
     def transform(r: Rotation): XYZ = {
-      val Seq(nextX, nextY, nextZ) = r.indices.map(i => toSeq(i) * r.signs(i))
+      val Array(nextX, nextY, nextZ) = r.indices.map(i => toSeq(i) * r.signs(i))
       XYZ(nextX, nextY, nextZ)
     }
     @targetName("add")
@@ -34,12 +34,12 @@ def day19(): Unit = {
     })
     skipped += scanners.last.length + 2
   }
-  // There might be only 24 possibilities instead of all 48
+  // It seems there are only 24 possibilities instead of all 48
   val allRotations = for {
-    signs <- Vector(Vector(-1, 1), Vector(-1, 1), Vector(-1, 1)).sequence
-    indices <- List(0, 1, 2).permutations
+    signs <- List(List(-1, 1), List(-1, 1), List(-1, 1)).sequence
+    indices <- Array(0, 1, 2).permutations
   } yield {
-    Rotation(signs, indices)
+    Rotation(signs.toArray, indices)
   }
   // (i)(j)(k) => ith scanner, jth rotation, kth beacon's XYZ
   val rotatedScanners = Vector(Vector().view) ++ (

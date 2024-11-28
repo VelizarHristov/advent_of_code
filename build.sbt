@@ -18,5 +18,5 @@ libraryDependencies += "io.github.pityka" %% "saddle-linalg" % "3.5.0"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "advent_of_code_2021"
+    name := "advent_of_code"
   )
