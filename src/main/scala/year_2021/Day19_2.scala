@@ -6,14 +6,14 @@ import annotation.{tailrec, targetName}
 import collection.mutable
 import io.Source
 
-@main // slow runtime - about 200 seconds on my machine
+@main // slow runtime - about 190 seconds on my machine
 def day19_2(): Unit = {
   val timeMsAtStart = System.currentTimeMillis()
-  case class Rotation(signs: Seq[Int], indices: Seq[Int])
+  case class Rotation(signs: Array[Int], indices: Array[Int])
   case class XYZ(x: Int, y: Int, z: Int) {
     lazy val toSeq: Seq[Int] = Seq(x, y, z)
     def transform(r: Rotation): XYZ = {
-      val Seq(nextX, nextY, nextZ) = r.indices.map(i => toSeq(i) * r.signs(i))
+      val Array(nextX, nextY, nextZ) = r.indices.map(i => toSeq(i) * r.signs(i))
       XYZ(nextX, nextY, nextZ)
     }
     @targetName("add")
@@ -22,9 +22,9 @@ def day19_2(): Unit = {
     def -(that: XYZ): XYZ = XYZ(x - that.x, y - that.y, z - that.z)
   }
   def beaconsToDists(beacons: Vector[XYZ]): Vector[Set[XYZ]] =
-    beacons.map { case XYZ(x1, y1, z1) =>
-      beacons.map { case XYZ(x2, y2, z2) =>
-        XYZ(x1 - x2, y1 - y2, z1 - z2) }.toSet - XYZ(0, 0, 0) }
+    beacons.map { p1 =>
+      beacons.map { p2 =>
+        p1 - p2 }.toSet - XYZ(0, 0, 0) }
 
   val scanners = mutable.ArrayBuffer[Vector[XYZ]]()
   var skipped = 0
@@ -36,12 +36,12 @@ def day19_2(): Unit = {
     })
     skipped += scanners.last.length + 2
   }
-  // There might be only 24 possibilities instead of all 48
+  // It seems there are only 24 possibilities instead of all 48 that we are using
   val allRotations = for {
-    signs <- Vector(Vector(-1, 1), Vector(-1, 1), Vector(-1, 1)).sequence
-    indices <- List(0, 1, 2).permutations
+    signs <- List(List(-1, 1), List(-1, 1), List(-1, 1)).sequence
+    indices <- Array(0, 1, 2).permutations
   } yield {
-    Rotation(signs, indices)
+    Rotation(signs.toArray, indices)
   }
   // (i)(j)(k) => ith scanner, jth rotation, kth beacon's XYZ
   val rotatedScanners = Vector(Vector().view) ++ (
