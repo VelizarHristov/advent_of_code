@@ -11,6 +11,7 @@ scalacOptions += "-Xlint:all"
 
 libraryDependencies += "org.typelevel" %% "cats-core" % "2.12.0"
 libraryDependencies += "org.typelevel" %% "cats-collections-core" % "0.9.8"
+libraryDependencies += "org.scala-lang.modules" %% "scala-parallel-collections" % "1.0.4"
 // Linear algebra
 libraryDependencies += "io.github.pityka" %% "saddle-core" % "3.5.0"
 libraryDependencies += "io.github.pityka" %% "saddle-ops-inlined" % "3.5.0"

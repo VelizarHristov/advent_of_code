@@ -1,12 +1,13 @@
 package year_2021
 
 import cats.syntax.all.*
+import collection.parallel.CollectionConverters._
 
 import annotation.{tailrec, targetName}
 import collection.mutable
 import io.Source
 
-// Takes about 2.5 seconds on my machine
+// Takes about 1 second on my machine
 @main
 def day19Faster(): Unit = {
   val timeMsAtStart = System.currentTimeMillis()
@@ -22,11 +23,10 @@ def day19Faster(): Unit = {
     @targetName("subtract")
     def -(that: XYZ): XYZ = XYZ(x - that.x, y - that.y, z - that.z)
   }
-  def beaconsToDists(srcBeacons: Vector[XYZ], dstBeacons: Vector[XYZ]): Vector[Set[XYZ]] =
-    srcBeacons.map { p1 =>
-      dstBeacons.map { p2 =>
+  def beaconsToDists(beacons: Vector[XYZ]): Vector[Set[XYZ]] =
+    beacons.map { p1 =>
+      beacons.map { p2 =>
         p1 - p2 }.toSet - XYZ(0, 0, 0) }
-  def beaconsToDistsSquare(beacons: Vector[XYZ]) = beaconsToDists(beacons, beacons)
 
   val input = Source.fromFile("resources/2021/19").getLines.drop(1).toVector
   val scanners = {
@@ -55,63 +55,65 @@ def day19Faster(): Unit = {
         scanner.map(_.transform(rotation)))
   // (i)(j)(k)(l) => ith scanner, jth rotation, kth beacon's set of dists
   val rotatedDists = rotatedScanners.map(scannerRotations => {
-    scannerRotations.map(beaconsToDistsSquare)
+    scannerRotations.map(beaconsToDists)
   })
 
   var remainingScannerIdx = scanners.indices.tail.toVector
   @tailrec
-  def findMatchingBeacons(dists: Map[XYZ, Int], nextScannerIdx: Int = 1, rotationIdx: Int = 0):
+  def findMatchingBeacons(dists: Map[XYZ, Int], nextScannerIdx: Int = 1):
   (Vector[XYZ], Vector[Set[XYZ]], Int, (Int, Int)) = {
-    if (!remainingScannerIdx.contains(nextScannerIdx) || rotationIdx == 48) {
+    if (!remainingScannerIdx.contains(nextScannerIdx)) {
       findMatchingBeacons(dists, nextScannerIdx + 1)
     } else {
-      val nextDists = rotatedDists(nextScannerIdx)(rotationIdx)
-      var numMatches = 0
-      var i = 0
-      var matchedPair: Option[(Int, Int)] = None
-      // not sure why this is as high as 12, the problem description said it ought to be
-      while (numMatches < 12 && i < nextDists.size) {
-        val nextBeaconDists = nextDists(i).iterator
-        val matches = mutable.Set[Int]()
-        var foundMatch = false
-        while (nextBeaconDists.hasNext && !foundMatch) {
-          val next = nextBeaconDists.next()
-          for (nextMatch <- dists.get(next)) {
-            if (matches.contains(nextMatch)) {
-              foundMatch = true
-              matchedPair = Some(nextMatch, i)
-            } else {
-              matches += nextMatch
+      (0 until 48).par.map(rotationIdx => {
+        val nextDists = rotatedDists(nextScannerIdx)(rotationIdx)
+        var numMatches = 0
+        var i = 0
+        var matchedPair: Option[(Int, Int)] = None
+        // not sure why this is as high as 12, the problem description said it ought to be
+        while (numMatches < 12 && i < nextDists.size) {
+          val nextBeaconDists = nextDists(i).iterator
+          val matches = mutable.Set[Int]()
+          var foundMatch = false
+          while (nextBeaconDists.hasNext && !foundMatch) {
+            val next = nextBeaconDists.next()
+            for (nextMatch <- dists.get(next)) {
+              if (matches.contains(nextMatch)) {
+                foundMatch = true
+                matchedPair = Some(nextMatch, i)
+              } else {
+                matches += nextMatch
+              }
             }
           }
+          if (foundMatch)
+            numMatches += 1
+          i += 1
         }
-        if (foundMatch)
-          numMatches += 1
-        i += 1
+        (numMatches == 12, rotationIdx, nextDists, matchedPair)
+      }).find(_._1) match {
+        case Some((_, rotationIdx, nextDists, matchedPair)) => (rotatedScanners(nextScannerIdx)(rotationIdx), nextDists, nextScannerIdx, matchedPair.get)
+        case None => findMatchingBeacons(dists, nextScannerIdx + 1)
       }
-      if (numMatches == 12)
-        (rotatedScanners(nextScannerIdx)(rotationIdx), nextDists, nextScannerIdx, matchedPair.get)
-      else
-        findMatchingBeacons(dists, nextScannerIdx, rotationIdx + 1)
     }
   }
 
   var scanner = scanners.head
   val scannerPositions = mutable.ArrayBuffer(XYZ(0, 0, 0))
+  var distToBeacon = (for ((dists, i) <- beaconsToDists(scanner).zipWithIndex; dist <- dists)
+    yield dist -> i).toMap
+
   while (remainingScannerIdx.nonEmpty) {
-    val distToBeacon = (for {
-      i <- scanner.indices
-      p1 = scanner(i)
-      p2 <- scanner
-      if p1 != p2
-    } yield {
-      (p1 - p2) -> i
-    }).toMap
     val (rotatedScanner, rotatedDists, nextIdx, (i, j)) = findMatchingBeacons(distToBeacon)
     val offset = scanner(i) - rotatedScanner(j)
     val adjustedNext = rotatedScanner.map(_ + offset)
 
     scanner = (scanner ++ adjustedNext).distinct
+    distToBeacon ++= (for {
+      (dists, i) <- beaconsToDists(adjustedNext).zipWithIndex
+      nextIdx = scanner.indexOf(adjustedNext(i))
+      dist <- dists
+    } yield dist -> nextIdx).toMap
     remainingScannerIdx = remainingScannerIdx.filter(_ != nextIdx)
     scannerPositions += offset
   }
