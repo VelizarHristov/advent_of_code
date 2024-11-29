@@ -73,6 +73,10 @@ def day19Faster(): Unit = {
         // not sure why this is as high as 12, the problem description said it ought to be
         while (numMatches < 12 && i < nextDists.size) {
           val nextBeaconDists = nextDists(i).iterator
+          // See note 2 below; if distances weren't unique then we'd need to look for more matches than 2
+          // We'd still get 1 false match, that's when we are looking at point A, and
+          //   the 180 degrees rotation, so it'd have A->B, which is normally minus B->A,
+          //   but due to the rotation they are equal.
           val matches = mutable.Set[Int]()
           var foundMatch = false
           while (nextBeaconDists.hasNext && !foundMatch) {
@@ -92,7 +96,8 @@ def day19Faster(): Unit = {
         }
         (numMatches == 12, rotationIdx, nextDists, matchedPair)
       }).find(_._1) match {
-        case Some((_, rotationIdx, nextDists, matchedPair)) => (rotatedScanners(nextScannerIdx)(rotationIdx), nextDists, nextScannerIdx, matchedPair.get)
+        case Some((_, rotationIdx, nextDists, matchedPair)) =>
+          (rotatedScanners(nextScannerIdx)(rotationIdx), nextDists, nextScannerIdx, matchedPair.get)
         case None => findMatchingBeacons(dists, nextScannerIdx + 1)
       }
     }
@@ -109,6 +114,10 @@ def day19Faster(): Unit = {
     val adjustedNext = rotatedScanner.map(_ + offset)
 
     scanner = (scanner ++ adjustedNext).distinct
+    // Note: we're only adding the distances between new beacons,
+    //   this just happens to be enough for the particular datasets.
+    // Note 2: we are relying on distances being distinct, which is
+    //   just a happy circumstance of our dataset.
     distToBeacon ++= (for {
       (dists, i) <- beaconsToDists(adjustedNext).zipWithIndex
       nextIdx = scanner.indexOf(adjustedNext(i))
