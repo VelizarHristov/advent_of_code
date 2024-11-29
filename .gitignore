@@ -6,3 +6,6 @@ target/
 **/.bloop
 **/.vscode/
 metals.sbt
+
+resources/*/*
+!resources/*/*_*
