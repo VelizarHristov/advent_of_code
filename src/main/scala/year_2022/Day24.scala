@@ -1,7 +1,7 @@
 package year_2022
 
 import io.Source
-import collection.mutable.{ArrayBuffer, PriorityQueue, Map => MutableMap}
+import collection.mutable.{ArrayBuffer, Set => MutableSet}
 
 @main
 def day24(): Unit = {
@@ -44,14 +44,12 @@ def day24(): Unit = {
     gridAt(timestep)
   }
 
-  case class State(x: Int, y: Int, timestep: Int) {
-    lazy val heuristic = timestep + maxX + maxY + 1 - x - y
-  }
-  val states = PriorityQueue(State(1, 0, 0))((s1, s2) => s2.heuristic.compare(s1.heuristic))
-  val visited = MutableMap(states.head -> states.head.heuristic).withDefaultValue(Int.MaxValue)
+  case class State(x: Int, y: Int, timestep: Int)
+  val states = ArrayBuffer(State(1, 0, 0))
+  val visited = MutableSet(states.head)
   var finalRes: Option[Int] = None
   while (finalRes.isEmpty) {
-    val State(prevX, prevY, prevTimestep) = states.dequeue()
+    val State(prevX, prevY, prevTimestep) = states.remove(0)
     val timestep = prevTimestep + 1
     val grid = getGrid(timestep)
     val next = (dirMap.values.toSeq :+ (0, 0)).map(
@@ -62,12 +60,10 @@ def day24(): Unit = {
       x >= 1 && y >= 1 &&
       x <= maxX && y <= maxY &&
       !grid((x, y)) &&
-      visited(st) > st.heuristic
+      !visited(st)
     }
-    for (state <- nextStates) {
-      states += state
-      visited(state) = state.heuristic
-    }
+    states ++= nextStates
+    visited ++= nextStates
   }
 
   println(finalRes.get)
