@@ -67,18 +67,16 @@ def day19Faster(): Unit = {
     } else {
       (0 until 48).par.map(rotationIdx => {
         val nextDists = rotatedDists(nextScannerIdx)(rotationIdx)
-        var numMatches = 0
+        var foundMatch = false
         var i = 0
         var matchedPair: Option[(Int, Int)] = None
-        // not sure why this is as high as 12, the problem description said it ought to be
-        while (numMatches < 12 && i < nextDists.size) {
+        while (!foundMatch && i < nextDists.size) {
           val nextBeaconDists = nextDists(i).iterator
           // See note 2 below; if distances weren't unique then we'd need to look for more matches than 2
           // We'd still get 1 false match, that's when we are looking at point A, and
           //   the 180 degrees rotation, so it'd have A->B, which is normally minus B->A,
           //   but due to the rotation they are equal.
           val matches = mutable.Set[Int]()
-          var foundMatch = false
           while (nextBeaconDists.hasNext && !foundMatch) {
             val next = nextBeaconDists.next()
             for (nextMatch <- dists.get(next)) {
@@ -90,11 +88,9 @@ def day19Faster(): Unit = {
               }
             }
           }
-          if (foundMatch)
-            numMatches += 1
           i += 1
         }
-        (numMatches == 12, rotationIdx, nextDists, matchedPair)
+        (foundMatch, rotationIdx, nextDists, matchedPair)
       }).find(_._1) match {
         case Some((_, rotationIdx, nextDists, matchedPair)) =>
           (rotatedScanners(nextScannerIdx)(rotationIdx), nextDists, nextScannerIdx, matchedPair.get)

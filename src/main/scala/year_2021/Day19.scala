@@ -6,7 +6,7 @@ import annotation.{tailrec, targetName}
 import collection.mutable
 import io.Source
 
-@main // slow runtime - about 190 seconds on my machine
+@main // slow runtime - about 60 seconds on my machine
 def day19(): Unit = {
   val timeMsAtStart = System.currentTimeMillis()
   case class Rotation(signs: Array[Int], indices: Array[Int])
@@ -59,17 +59,13 @@ def day19(): Unit = {
       findMatchingBeacons(dists, nextScannerIdx + 1)
     } else {
       val nextDists = rotatedDists(nextScannerIdx)(rotationIdx)
-      val matches = for {
+      (for {
         i <- dists.indices.view
         j <- nextDists.indices
         if dists(i).intersect(nextDists(j)).size >= 2
-      } yield (i, j)
-      // not sure why this is as high as 12, the problem description said it ought to be
-      if (matches.take(12).size == 12) {
-        val (i, j) = matches.head
-        (rotatedScanners(nextScannerIdx)(rotationIdx), nextScannerIdx, i, j)
-      } else {
-        findMatchingBeacons(dists, nextScannerIdx, rotationIdx + 1)
+      } yield (i, j)).headOption match {
+        case Some((i, j)) => (rotatedScanners(nextScannerIdx)(rotationIdx), nextScannerIdx, i, j)
+        case None => findMatchingBeacons(dists, nextScannerIdx, rotationIdx + 1)
       }
     }
   }
