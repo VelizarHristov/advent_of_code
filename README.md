@@ -1,7 +1,7 @@
 Solving Advent of Code problems across multiple years in Scala.
 
 Some of my solutions are in other repositories:
-- [2023 in C#](https://github.com/VelizarHristov/AdventOfCode2023)
+- [Complete 2023 in C#](https://github.com/VelizarHristov/AdventOfCode2023)
 - [Some of 2022 in Kotlin](https://github.com/VelizarHristov/advent_of_code_2022)
 - [Some of 2019 in Rust and some in OCaml](https://github.com/VelizarHristov/advent_of_code_2019)
 
