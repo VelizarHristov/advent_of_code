@@ -11,6 +11,8 @@ object Helpers {
     def +(point2: (Int, Int)): (Int, Int) = (point._1 + point2._1, point._2 + point2._2)
     @targetName("neg")
     def unary_- : (Int, Int) = point * -1
+    @targetName("sub")
+    def -(point2: (Int, Int)): (Int, Int) = point + -point2
   }
 
   extension (point: (Int, Int, Int)) {
