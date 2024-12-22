@@ -2,7 +2,7 @@ package year_2024
 
 import io.Source
 
-import year_2022.Helpers.safeGet
+import helpers.Helpers.safeGet
 
 @main
 def day10(): Unit = {

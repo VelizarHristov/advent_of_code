@@ -1,6 +1,6 @@
 package year_2022
 
-import year_2022.Helpers.safeGet
+import helpers.Helpers.safeGet
 
 import io.Source
 import scala.collection.mutable

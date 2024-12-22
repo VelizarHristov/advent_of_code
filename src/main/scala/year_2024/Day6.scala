@@ -2,7 +2,7 @@ package year_2024
 
 import io.Source
 
-import year_2022.Helpers._
+import helpers.Helpers._
 
 @main
 def day6(): Unit = {

@@ -3,7 +3,7 @@ package year_2024
 import io.Source
 import collection.mutable
 
-import year_2022.Helpers.safeGet
+import helpers.Helpers.safeGet
 
 @main
 def day12(): Unit = {

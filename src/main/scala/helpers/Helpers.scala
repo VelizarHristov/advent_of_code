@@ -1,4 +1,4 @@
-package year_2022
+package helpers
 
 import annotation.targetName
 import scala.reflect.ClassTag

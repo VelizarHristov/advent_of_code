@@ -1,7 +1,7 @@
 package year_2022
 
 import io.Source
-import year_2022.Helpers.wrapMod
+import helpers.Helpers.wrapMod
 
 @main
 def day20_2(): Unit = {

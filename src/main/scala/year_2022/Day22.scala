@@ -1,7 +1,7 @@
 package year_2022
 
 import io.Source
-import year_2022.Helpers._
+import helpers.Helpers._
 
 @main
 def day22(): Unit = {
@@ -17,7 +17,6 @@ def day22(): Unit = {
   var curDirIdx = -1
   def dir = dirs(wrapMod(curDirIdx, 4))
   while (rawMoves.nonEmpty) {
-    println((pos, dir))
     curDirIdx += (if (rawMoves.head == 'R') 1 else -1)
     val lenStr = rawMoves.tail.takeWhile(_.isDigit)
     rawMoves = rawMoves.substring(1 + lenStr.length)
@@ -40,7 +39,6 @@ def day22(): Unit = {
     }
     pos = lastValidPos
   }
-  println((pos, dir))
 
   val res = (pos._1 + 1) * 1000 + (pos._2 + 1) * 4 + curDirIdx % 4
   println(res)

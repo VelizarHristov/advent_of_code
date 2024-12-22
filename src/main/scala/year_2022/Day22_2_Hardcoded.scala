@@ -1,6 +1,6 @@
 package year_2022
 
-import year_2022.Helpers.*
+import helpers.Helpers.*
 
 import io.Source
 
