@@ -41,7 +41,7 @@ def day15_2(): Unit = {
   }
 
   for (move <- moves) {
-    val robotPos@(robotX, robotY) = (for (
+    val (robotX, robotY) = (for (
       y <- grid.indices.view; x <- grid(y).indices if grid(y)(x) == '@'
     ) yield (x, y)).head
     val (dx, dy) = move match {
