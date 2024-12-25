@@ -18,6 +18,7 @@ def day21_2(): Unit = {
   val numpadCoords = numpad.map(_.swap)
   val btnCoords = controls.map(_.swap)
   val dirToCoords = controlToDir.map(_.swap)
+  val dirs = dirToCoords.keySet
   // depth - at MAX_DEPTH is controlled by human; at 0 controls the numpad directly
   // lowerCoords - the coordinates of the robot one depth below (all deeper robots are at 'A')
   // returns the number of human presses to reach `to` and press the button there
@@ -34,16 +35,7 @@ def day21_2(): Unit = {
           } else if (from == to) {
             pathLength(depth + 1, lowerCoords, btnCoords('A'))
           } else {
-            val (distX, distY) = to - from
-            val dx = if (distX != 0) {
-              val dir = if (distX > 0) 1 else -1
-              Some((dir, 0))
-            } else None
-            val dy = if (distY != 0) {
-              val dir = if (distY > 0) 1 else -1
-              Some((0, dir))
-            } else None
-            Seq(dx, dy).flatten.filter(d => validCoords(d + from)).map(step => {
+            dirs.filter(d => validCoords(d + from)).map(step => {
               val nextLowerCoords = btnCoords(dirToCoords(step))
               val steps = pathLength(depth + 1, lowerCoords, nextLowerCoords)
               steps + pathLength(depth, from + step, to, nextLowerCoords)
