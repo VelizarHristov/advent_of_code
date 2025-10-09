@@ -7,11 +7,9 @@ import helpers.Helpers._
 
 @main
 def day11(): Unit =
-  case class Program(
-    prog: mutable.Map[BigInt, BigInt],
-    var pos: BigInt = 0,
-    var relOffset: BigInt = 0,
-  ):
+  case class Program(prog: mutable.Map[BigInt, BigInt]):
+    var pos = BigInt(0)
+    var relOffset = BigInt(0)
     def op = prog(pos).toString
     def command = op.takeRight(2).toInt
     def mode(i: Int) =

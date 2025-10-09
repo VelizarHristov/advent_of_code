@@ -2,11 +2,9 @@ package year_2019
 
 import io.Source
 import collection.mutable
-import helpers.Helpers.wrapMod
-import helpers.Helpers._
 
 @main
-def day11_2(): Unit =
+def day13(): Unit =
   case class Program(prog: mutable.Map[BigInt, BigInt]):
     var pos = BigInt(0)
     var relOffset = BigInt(0)
@@ -40,7 +38,7 @@ def day11_2(): Unit =
         nextInputIdx += 1
         res
 
-      while (command != 99 && outputs.length < 2)
+      while (command != 99)
         var toStore: Option[BigInt] = None
         var newPos = pos + numInstructions
         command match
@@ -57,35 +55,12 @@ def day11_2(): Unit =
         pos = newPos
       outputs
 
-  val progArray = Source.fromFile("resources/2019/11").getLines.next.split(',').map(BigInt.apply)
+  val progArray = Source.fromFile("resources/2019/13").getLines.next.split(',').map(BigInt.apply)
   val prog = progArray.indices
     .map(BigInt.apply)
     .zip(progArray)
     .to(mutable.Map)
     .withDefaultValue(BigInt(0))
-  val program = Program(prog)
-  var curPos = (0, 0)
-  val dirs = Seq((0, -1), (1, 0), (0, 1), (-1, 0))
-  var curDirIdx = 0
-  def dir = dirs(curDirIdx)
-  var whiteTiles = Set[(Int, Int)]((0, 0))
-
-  while (program.command != 99)
-    val inputs = Seq(if whiteTiles.contains(curPos) then BigInt(1) else BigInt(0))
-    program.run(inputs) match
-      case Vector(newColor, direction) =>
-        if newColor == 0 then
-          whiteTiles -= curPos
-        else
-          whiteTiles += curPos
-        val dirChange = if direction == 1 then 1 else -1
-        curDirIdx = wrapMod(curDirIdx + dirChange.toInt, 4)
-        curPos += dir
-      case _ =>
-
-  val allX = whiteTiles.map(_._1)
-  val allY = whiteTiles.map(_._2)
-  for (y <- allY.min to allY.max)
-    for (x <- allX.min to allX.max)
-      print(if whiteTiles((x, y)) then '#' else '.')
-    println()
+  val progOutput = Program(prog).run(Seq())
+  val res = progOutput.grouped(3).count(ls => ls(2) == 2)
+  println(res)
