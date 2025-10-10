@@ -28,6 +28,10 @@ object Helpers {
     ls.lift(x).getOrElse(Array()).lift(y)
   }
 
+  def safeGetT[A: ClassTag](ls: Array[Array[A]], xy: (Int, Int)): Option[A] =
+    val (x, y) = xy
+    safeGet(ls, x, y)
+
   def wrapMod(i: Long, j: Int): Int = (((i % j) + j) % j).toInt
   def wrapMod(i: Int, j: Int): Int = wrapMod(i.toLong, j)
 }
