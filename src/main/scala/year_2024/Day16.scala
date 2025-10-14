@@ -17,7 +17,7 @@ def day16(): Unit = {
   val visited = mutable.Map((startPos, startDirIdx) -> 0).withDefaultValue(Int.MaxValue)
   val states = mutable.PriorityQueue(
     ((startPos, startDirIdx), 0)
-  )((s1, s2) => s2._2.compare(s1._2))
+  )(using (s1, s2) => s2._2.compare(s1._2))
   var minCost = Int.MaxValue
   while (states.head._2 < minCost) {
     val ((pos@(x, y), dirIdx), cost) = states.dequeue()

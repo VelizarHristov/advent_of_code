@@ -50,7 +50,7 @@ def day22_2(): Unit = {
     ), true))
     var nextGridIdx = 0
     while (nextGridIdx < 6) {
-      val plane@Plane(_, x, y, transformM, dir3IsAtZero) = gridsSoFar(nextGridIdx)
+      val plane@Plane(_, x, y, transformM, _) = gridsSoFar(nextGridIdx)
       nextGridIdx += 1
       for {
         (xChange, yChange, movedDirRef) <- Seq(

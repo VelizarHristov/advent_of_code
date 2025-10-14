@@ -3,8 +3,6 @@ package year_2019
 import io.Source
 import collection.mutable
 
-import helpers.Helpers._
-
 @main
 def day25(): Unit =
   case class Program(prog: mutable.Map[BigInt, BigInt]):

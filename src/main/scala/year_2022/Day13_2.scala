@@ -2,11 +2,15 @@ package year_2022
 
 import io.Source
 
-@main
-def day13_2(): Unit = {
+object Day13_2_Class {
   case class PacketData(data: List[PacketData | Int]) {
     override def toString: String = "[" + data.mkString(",") + "]"
   }
+}
+
+@main
+def day13_2(): Unit = {
+  import Day13_2_Class.PacketData
   def compareTo(data1: PacketData | Int, data2: PacketData | Int): Int = (data1, data2) match {
     case (i1: Int, i2: Int) => i1.compareTo(i2)
     case (PacketData(_), i2: Int) => compareTo(data1, PacketData(List(i2)))
@@ -38,10 +42,10 @@ def day13_2(): Unit = {
     .filter(_.nonEmpty)
     .appendedAll(toAdd)
   val allPacketData = inputData.map(x => parsePacketData(x)._1)
-  val sorted = allPacketData.sorted(Ordering(compareTo(_, _)))
+  val sorted = allPacketData.sorted(using Ordering(using compareTo(_, _)))
   val res = sorted.zipWithIndex
     .filter { case (data, _) => toAdd.contains(data.toString) }
-    .map { case (data, idx) => idx + 1 }
+    .map { case (_, idx) => idx + 1 }
     .product
   println(res)
 }

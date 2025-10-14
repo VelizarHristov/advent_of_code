@@ -20,7 +20,7 @@ def day9(): Unit = {
     val len = line.drop(2).toInt
     for (_ <- 1 to len) {
       head += headDirection
-      for (direction@(dx, dy) <- dirMap.values)
+      for (direction <- dirMap.values)
         if (head == tail + direction * 2)
           tail += direction
       for (xDir <- Seq(-1, 1))

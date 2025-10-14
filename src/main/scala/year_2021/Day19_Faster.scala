@@ -61,7 +61,7 @@ def day19Faster(): Unit = {
   var remainingScannerIdx = scanners.indices.tail.toVector
   @tailrec
   def findMatchingBeacons(dists: Map[XYZ, Int], nextScannerIdx: Int = 1):
-  (Vector[XYZ], Vector[Set[XYZ]], Int, (Int, Int)) = {
+  (Vector[XYZ], Int, (Int, Int)) = {
     if (!remainingScannerIdx.contains(nextScannerIdx)) {
       findMatchingBeacons(dists, nextScannerIdx + 1)
     } else {
@@ -90,10 +90,10 @@ def day19Faster(): Unit = {
           }
           i += 1
         }
-        (foundMatch, rotationIdx, nextDists, matchedPair)
+        (foundMatch, rotationIdx, matchedPair)
       }).find(_._1) match {
-        case Some((_, rotationIdx, nextDists, matchedPair)) =>
-          (rotatedScanners(nextScannerIdx)(rotationIdx), nextDists, nextScannerIdx, matchedPair.get)
+        case Some((_, rotationIdx, matchedPair)) =>
+          (rotatedScanners(nextScannerIdx)(rotationIdx), nextScannerIdx, matchedPair.get)
         case None => findMatchingBeacons(dists, nextScannerIdx + 1)
       }
     }
@@ -105,7 +105,7 @@ def day19Faster(): Unit = {
     yield dist -> i).toMap
 
   while (remainingScannerIdx.nonEmpty) {
-    val (rotatedScanner, rotatedDists, nextIdx, (i, j)) = findMatchingBeacons(distToBeacon)
+    val (rotatedScanner, nextIdx, (i, j)) = findMatchingBeacons(distToBeacon)
     val offset = scanner(i) - rotatedScanner(j)
     val adjustedNext = rotatedScanner.map(_ + offset)
 

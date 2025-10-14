@@ -21,22 +21,19 @@ def day22_Alt(): Unit = {
   var curDirIdx = -1
   def dir = dirs(wrapMod(curDirIdx, 4))
   while (rawMoves.nonEmpty) {
-    println((pos, dir))
     curDirIdx += (if (rawMoves.head == 'R') 1 else -1)
-    println(curDirIdx)
     val rawLen = rawMoves.tail.takeWhile(_.isDigit)
     rawMoves = rawMoves.substring(1 + rawLen.length)
     for (_ <- 1 to rawLen.toInt) {
       var nextPos = pos + dir
       val (y, x) = nextPos
-      if (grid(y)(x) == ' ') {
-        dir match {
+      if (grid(y)(x) == ' ') then
+        dir match
           case (0, 1) => nextPos = (y, grid(y).indexWhere(_ != ' '))
           case (1, 0) => nextPos = (grid.indexWhere(row => row(x) != ' '), x)
           case (0, -1) => nextPos = (y, grid(y).lastIndexWhere(_ != ' '))
           case (-1, 0) => nextPos = (grid.lastIndexWhere(row => row(x) != ' '), x)
-        }
-      }
+          case _ => throw new IllegalStateException("Program bug")
       val (y1, x1) = nextPos
       grid(y1)(x1) match {
         case '.' => pos = nextPos
@@ -44,7 +41,6 @@ def day22_Alt(): Unit = {
       }
     }
   }
-  println((pos, dir))
 
   val res = pos._1 * 1000 + pos._2 * 4 + curDirIdx % 4
   println(res)

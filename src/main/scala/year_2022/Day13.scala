@@ -2,11 +2,15 @@ package year_2022
 
 import io.Source
 
-@main
-def day13(): Unit = {
+object Day13_Class {
   case class PacketData(data: List[PacketData | Int]) {
     override def toString: String = "[" + data.mkString(",") + "]"
   }
+}
+
+@main
+def day13(): Unit = {
+  import Day13_Class.PacketData
   def compareTo(data1: PacketData | Int, data2: PacketData | Int): Int = (data1, data2) match {
     case (i1: Int, i2: Int) => i1.compareTo(i2)
     case (PacketData(_), i2: Int) => compareTo(data1, PacketData(List(i2)))

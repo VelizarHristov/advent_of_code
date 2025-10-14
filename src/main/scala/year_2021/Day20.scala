@@ -14,7 +14,7 @@ def day20(): Unit = {
   for (i <- initialGrid.indices; j <- initialGrid(i).indices)
     grid(offset + i)(offset + j) = initialGrid(i)(j)
 
-  for (it <- 1 to iterations) {
+  for (_ <- 1 to iterations) {
     for {
       i <- 1 until grid.length - 1
       j <- 1 until grid.head.length - 1

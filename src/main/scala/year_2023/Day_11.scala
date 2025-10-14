@@ -16,7 +16,7 @@ def day11(): Unit = {
     }
   }
 
-  val colsToExpand = grid.transpose.zipWithIndex.filter { case (a, b) => a.forall(x => !x)}.map(_._2)
+  val colsToExpand = grid.transpose.zipWithIndex.filter { case (a, _) => a.forall(x => !x)}.map(_._2)
   for (i <- grid.indices) {
     var added = 0
     for (colToAdd <- colsToExpand) {

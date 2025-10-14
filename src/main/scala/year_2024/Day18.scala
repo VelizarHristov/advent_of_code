@@ -21,7 +21,7 @@ def day18(): Unit = {
       y < 0 || y >= gridSize ||
       occupied.contains((x, y)) ||
       visited.contains((x, y))
-  val states = mutable.PriorityQueue(((0, 0), 0))((s1, s2) => s2._2.compare(s1._2))
+  val states = mutable.PriorityQueue(((0, 0), 0))(using (s1, s2) => s2._2.compare(s1._2))
   var found: Option[Int] = None
   while (found == None) {
     val (nextPos, moves) = states.dequeue()
