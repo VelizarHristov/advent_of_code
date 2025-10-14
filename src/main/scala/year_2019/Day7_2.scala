@@ -46,9 +46,9 @@ def day7_2(): Unit =
         pos = newPos
       outputs
 
-  val prog = Source.fromFile("resources/2019/7").getLines.next.split(',').map(_.toInt)
+  val prog = Source.fromFile("resources/2019/7").mkString.split(',').map(_.toInt)
   val res = (5 to 9).permutations.map(seq =>
-    val programs = (1 to 5).map(_ => Program(prog.clone()))
+    val programs = Array.fill(5)(Program(prog.clone()))
     var nextProgIdx = 0
     var lastOutput = 0
     def nextProg = programs(nextProgIdx % 5)

@@ -46,7 +46,7 @@ def day7(): Unit =
       pos = newPos
     outputs
 
-  val prog = Source.fromFile("resources/2019/7").getLines.next.split(',').map(_.toInt)
+  val prog = Source.fromFile("resources/2019/7").mkString.split(',').map(_.toInt)
   val res = (0 to 4).permutations.map(seq =>
     var lastOutput = 0
     for (next <- seq)

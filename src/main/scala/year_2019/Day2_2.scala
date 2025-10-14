@@ -15,7 +15,7 @@ def day2_2(): Unit =
       pos += 4
 
   val filename = "resources/2019/2"
-  val originalProg = Source.fromFile(filename).getLines.next.split(',').map(_.toInt)
+  val originalProg = Source.fromFile(filename).mkString.split(',').map(_.toInt)
   val target = 19690720
   for (input1 <- 0 to 100; input2 <- 0 to 100)
     val prog = originalProg.clone()

@@ -39,6 +39,8 @@ def day13_2_Complicated(): Unit =
     def runOnce(input: Int): Option[Int] =
       var inputConsumed = false
       var commandsSoFar = 0
+      // The program might get in an infinite loop, if it does
+      //   then count it as a defeat with score of 0
       while (command != 99 && (!inputConsumed || command != 3) && commandsSoFar < 100_000)
         var toStore: Option[Int] = None
         var newPos = pos + numInstructions

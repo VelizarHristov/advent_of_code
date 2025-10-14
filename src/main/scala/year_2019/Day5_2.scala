@@ -43,7 +43,7 @@ def day5_2(): Unit =
       pos = newPos
     outputs
 
-  val prog = Source.fromFile("resources/2019/5").getLines.next.split(',').map(_.toInt)
+  val prog = Source.fromFile("resources/2019/5").mkString.split(',').map(_.toInt)
   val output = runProgram(prog)
   if output.init.forall(_ == 0) then
     println(output.last)
