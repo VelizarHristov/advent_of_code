@@ -4,7 +4,7 @@ import io.Source
 
 @main
 def day2_2(): Unit =
-  val input = Source.fromFile("resources/2025/2_test").getLines.next.split(',').map: rangeStr =>
+  val input = Source.fromFile("resources/2025/2").getLines.next.split(',').map: rangeStr =>
     val Array(start, end) = rangeStr.split('-').map(_.toLong)
     start to end
   val res = input.map(_.filter(i => {
