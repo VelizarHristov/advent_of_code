@@ -1,7 +1,5 @@
 package year_2025
 
-import helpers.Helpers._
-
 import io.Source
 
 @main
