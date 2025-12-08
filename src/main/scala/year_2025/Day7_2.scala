@@ -4,7 +4,7 @@ import io.Source
 
 @main
 def day7_2(): Unit =
-  val grid = Source.fromFile("resources/2025/7_test").getLines.toArray
+  val grid = Source.fromFile("resources/2025/7").getLines.toArray
   val (startY, startX) = (for
     y <- grid.indices
     x <- grid(y).indices
