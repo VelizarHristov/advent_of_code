@@ -17,8 +17,11 @@ def day9_2(): Unit =
     yDiff = (y1 - y2).abs + 1
     dist = xDiff.toLong * yDiff
   yield (x1 min x2, x1 max x2, y1 min y2, y1 max y2, dist)
-  val bestPair = areas.sortBy(-_._5).find((minX, maxX, minY, maxY, _) => {
+// Note: only works with our data
+// For more generality: start a line in x and in y that reaches our rectangle
+//   which should intersect an odd number of green lines
+  val bestPair = areas.sortBy(-_._5).find((minX, maxX, minY, maxY, _) =>
     !greenLines.exists: (minX2, maxX2, minY2, maxY2) =>
       minX < maxX2 && minX2 < maxX && minY < maxY2 && minY2 < maxY
-  }).get._5
+  ).get._5
   println(bestPair)
