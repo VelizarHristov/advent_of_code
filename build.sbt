@@ -17,6 +17,9 @@ libraryDependencies += "io.github.pityka" %% "saddle-core" % "3.5.0"
 libraryDependencies += "io.github.pityka" %% "saddle-ops-inlined" % "3.5.0"
 libraryDependencies += "io.github.pityka" %% "saddle-linalg" % "3.5.0"
 
+libraryDependencies += "com.github.vagmcs" %% "optimus" % "3.4.5"
+libraryDependencies += "com.github.vagmcs" %% "optimus-solver-oj" % "3.4.5"
+
 lazy val root = (project in file("."))
   .settings(
     name := "advent_of_code"
