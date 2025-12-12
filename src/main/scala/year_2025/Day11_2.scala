@@ -11,19 +11,13 @@ def day11_2(): Unit =
   }).toMap
 
   // DFS
-  val numPathsMemo = collection.mutable.Map[String, (Long, Boolean, Boolean)]()
-  def numPaths(src: String): (Long, Boolean, Boolean) =
-    if (src == "out") then
-      (1, false, false)
-    else
-      lazy val res =
-        val next = input(src).map(numPaths)
-        val hasFft = next.exists(_._2)
-        val hasDac = next.exists(_._3)
-        val totalPaths = next.filter((_, fft, dac) =>
-          (!hasFft || fft) && (!hasDac || dac) 
-        ).map(_._1).sum
-        (totalPaths, hasFft || src == "fft", hasDac || src == "dac")
-      numPathsMemo.getOrElseUpdate(src, res)
-  val res = numPaths("svr")._1
+  val numPathsMemo = collection.mutable.Map[(String, String), Long]()
+  def numPaths(src: String, dst: String): Long = src match
+    case "out" => 0
+    case s if s == dst => 1
+    case _ =>
+      lazy val res = input(src).map(s => numPaths(s, dst)).sum
+      numPathsMemo.getOrElseUpdate((src, dst), res)
+  val (a, b) = if (numPaths("fft", "dac") == 0) ("dac", "fft") else ("fft", "dac")
+  val res = numPaths("svr", a) * numPaths(a, b) * numPaths(b, "out")
   println(res)
