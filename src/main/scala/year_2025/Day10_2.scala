@@ -17,10 +17,10 @@ def day10_2(): Unit =
   // silence logging from Optimus
   LoggerFactory.getLogger(ROOT_LOGGER_NAME).asInstanceOf[Logger].setLevel(Level.WARN)
 
-  val res = Source.fromFile("resources/2025/10").getLines.toArray.map(line => {
-    val sections = line.split(' ')
+  val res = Source.fromFile("resources/2025/10").getLines.map(line => {
+    val sections = line.split(' ').tail
     val req = sections.last.tail.init.split(',').map(_.toInt)
-    val btns = sections.tail.init.map(_.tail.init.split(',').map(_.toInt)).map: btn =>
+    val btns = sections.init.map(_.tail.init.split(',').map(_.toInt)).map: btn =>
       req.indices.map: i =>
         if (btn.contains(i)) 1 else 0
 
@@ -34,5 +34,5 @@ def day10_2(): Unit =
     optimization.start()
     optimization.release()
     problem.objectiveValue
-  }).sum.toInt
+  }).sum.round.toInt
   println(res)
